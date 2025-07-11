@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Reportes | Campo Verde</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="row">
+    <nav class="sidebar">
+      <!-- mismo sidebar -->
+    </nav>
+    <main class="main container">
+      <header><h1>Reportar Incidencia</h1></header>
+      <div class="card">
+        <form action="/api/reportes" method="post" enctype="multipart/form-data">
+          <label for="area">Área afectada</label>
+          <select id="area" name="area" required>
+            <option value="">Selecciona</option>
+            <option value="jardines">Jardines</option>
+          </select>
+          
+          <label for="descripcion">Descripción</label>
+          <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
+          
+          <label for="foto">Foto del problema</label>
+          <input type="file" id="foto" name="foto" accept="image/*">
+          
+          <button class="btn" type="submit">Enviar Reporte</button>
+        </form>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

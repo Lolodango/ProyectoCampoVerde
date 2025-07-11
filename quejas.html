@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quejas - Campo Verde</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="d-flex">
+    <!-- Sidebar -->
+    <nav class="bg-success text-white p-3 min-vh-100" style="width: 250px;">
+  <h4 class="mb-4 text-center">Campo Verde</h4>
+  <ul class="nav flex-column">
+    <li class="nav-item"><a href="dashboard.html" class="nav-link text-white">🏠 Dashboard</a></li>
+    <li class="nav-item"><a href="noticias.html" class="nav-link text-white">📰 Noticias</a></li>
+    <li class="nav-item"><a href="pagos.html" class="nav-link text-white">💵 Pagos</a></li>
+    <li class="nav-item"><a href="quejas.html" class="nav-link text-white">📣 Mis Quejas</a></li>
+
+    <!-- Opciones del administrador -->
+    <li class="nav-item">
+      <a class="nav-link text-white" data-bs-toggle="collapse" href="#adminMenu" role="button" aria-expanded="false" aria-controls="adminMenu">
+        ⚙️ Administrador
+      </a>
+      <div class="collapse" id="adminMenu">
+        <ul class="nav flex-column ms-3 mt-2">
+          <li class="nav-item"><a href="usuarios.html" class="nav-link text-white">👤 Gestión de Usuarios</a></li>
+          <li class="nav-item"><a href="quejas_admin.html" class="nav-link text-white">📣 Ver Quejas</a></li>
+          <li class="nav-item"><a href="reportes.html" class="nav-link text-white">📋 Reportes</a></li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+</nav>
+
+
+    <!-- Main Content -->
+    <div class="flex-grow-1">
+      <!-- Top bar -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-end px-4">
+        <div class="dropdown">
+          <a class="btn btn-outline-success dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+            Bienvenido, <strong>Juan Pérez</strong>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#">Ajustes</a></li>
+            <li><hr class="dropdown-divider" /></li>
+            <li><a class="dropdown-item" href="inicio.html">Cerrar sesión</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container mt-4">
+        <h3 class="text-success mb-4">Mis Quejas</h3>
+
+        <!-- Historial de quejas -->
+        <div class="mb-5">
+          <h5>Historial de Quejas Enviadas</h5>
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+              <thead class="table-success">
+                <tr>
+                  <th>#</th>
+                  <th>Fecha</th>
+                  <th>Título</th>
+                  <th>Estado</th>
+                  <th>Detalle</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>2025-07-05</td>
+                  <td>Ruido excesivo</td>
+                  <td>En revisión</td>
+                  <td>Los vecinos del bloque B han tenido música alta hasta la madrugada.</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>2025-06-22</td>
+                  <td>Basura en áreas comunes</td>
+                  <td>Resuelta</td>
+                  <td>Hay acumulación de basura cerca del parque infantil.</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>2025-05-14</td>
+                  <td>Luces apagadas en sendero</td>
+                  <td>Resuelta</td>
+                  <td>El sendero detrás del gimnasio está completamente a oscuras por la noche.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Formulario para nueva queja -->
+        <div class="mb-5">
+          <h5>Registrar Nueva Queja</h5>
+          <form>
+            <div class="mb-3">
+              <label for="titulo" class="form-label">Título</label>
+              <input type="text" class="form-control" id="titulo" placeholder="Ej: Ruido excesivo en la noche" required>
+            </div>
+            <div class="mb-3">
+              <label for="detalle" class="form-label">Descripción</label>
+              <textarea class="form-control" id="detalle" rows="4" placeholder="Escriba aquí su queja..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-success">Enviar Queja</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
