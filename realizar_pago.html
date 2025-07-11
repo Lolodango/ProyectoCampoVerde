@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Realizar Pago | Campo Verde</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/script_realizar_pago.js"></script>
+</head>
+<body>
+  <div class="d-flex">
+    <nav class="bg-success text-white p-3 min-vh-100" style="width: 250px;">
+      <h4 class="mb-4 text-center">Campo Verde</h4>
+      <ul class="nav flex-column">
+        <li class="nav-item"><a href="dashboard.html" class="nav-link text-white">🏠 Dashboard</a></li>
+        <li class="nav-item"><a href="noticias.html" class="nav-link text-white">📰 Noticias</a></li>
+        <li class="nav-item"><a href="pagos.html" class="nav-link text-white fw-bold">💵 Pagos</a></li>
+        <li class="nav-item"><a href="quejas.html" class="nav-link text-white">📣 Mis Quejas</a></li>
+        <li class="nav-item"><a href="reportes.html" class="nav-link text-white">📣 Mis Reportes</a></li>
+      </ul>
+    </nav>
+
+    <div class="flex-grow-1">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-end px-4">
+        <div class="dropdown">
+          <a class="btn btn-outline-success dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+            Bienvenido, <strong>Edcelth Jimenez</strong>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#">Ajustes</a></li>
+            <li><hr class="dropdown-divider" /></li>
+            <li><a class="dropdown-item" href="index.html">Cerrar sesión</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container mt-4">
+        <h3 class="text-success mb-4">Realizar Pago</h3>
+
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Resumen del Pago</h5>
+            <p><strong>Concepto:</strong> Cuota de mantenimiento - Julio 2025</p>
+            <p><strong>Monto:</strong> ₡35,000</p>
+            <p><strong>Fecha límite:</strong> 25 de julio, 2025</p>
+          </div>
+        </div>
+
+        <form>
+          <div class="mb-3">
+            <label for="metodoPago" class="form-label">Método de Pago</label>
+            <select class="form-select" id="metodoPago" required>
+              <option value="">Selecciona una opción</option>
+              <option value="tarjeta">Tarjeta de crédito/débito</option>
+              <option value="transferencia">Transferencia bancaria</option>
+              <option value="sinpe">SINPE Móvil</option>
+            </select>
+          </div>
+
+          <div id="seccionTarjeta" style="display: none;">
+            <div class="mb-3">
+              <label for="numTarjeta" class="form-label">Número de tarjeta</label>
+              <input type="text" class="form-control" id="numTarjeta" placeholder="#### #### #### ####">
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="fechaVenc" class="form-label">Fecha de vencimiento</label>
+                <input type="text" class="form-control" id="fechaVenc" placeholder="MM/AA">
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="cvv" class="form-label">CVV</label>
+                <input type="text" class="form-control" id="cvv" placeholder="123">
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-success mt-3">Confirmar Pago</button>
+          <a href="pagos.html" class="btn btn-outline-secondary mt-3 ms-2">Cancelar</a>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Usuarios - Campo Verde</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <div class="d-flex">
-    <!-- Sidebar -->
    <nav class="bg-success text-white p-3 min-vh-100" style="width: 250px;">
   <h4 class="mb-4 text-center">Campo Verde</h4>
   <ul class="nav flex-column">
@@ -17,27 +17,25 @@
     <li class="nav-item"><a href="noticias.html" class="nav-link text-white">📰 Noticias</a></li>
     <li class="nav-item"><a href="pagos.html" class="nav-link text-white">💵 Pagos</a></li>
     <li class="nav-item"><a href="quejas.html" class="nav-link text-white">📣 Mis Quejas</a></li>
-
-    <!-- Opciones del administrador -->
+    <li class="nav-item"><a href="reportes.html" class="nav-link text-white">📣 Mis Reportes</a></li>
+   
     <li class="nav-item">
       <a class="nav-link text-white" data-bs-toggle="collapse" href="#adminMenu" role="button" aria-expanded="false" aria-controls="adminMenu">
         ⚙️ Administrador
       </a>
       <div class="collapse" id="adminMenu">
         <ul class="nav flex-column ms-3 mt-2">
-          <li class="nav-item"><a href="usuarios.html" class="nav-link text-white">👤 Gestión de Usuarios</a></li>
+          <li class="nav-item"><a href="usuarios.html" class="nav-link text-white activo">👤 Gestión de Usuarios</a></li>
           <li class="nav-item"><a href="quejas_admin.html" class="nav-link text-white">📣 Ver Quejas</a></li>
-          <li class="nav-item"><a href="reportes.html" class="nav-link text-white">📋 Reportes</a></li>
+          <li class="nav-item"><a href="reportes_admin.html" class="nav-link text-white">📋 Ver Reportes</a></li>
+          <li class="nav-item"><a href="pagos_admin.html" class="nav-link text-white">🧍‍♂️💵 Pagos Usuarios</a></li>
         </ul>
       </div>
     </li>
   </ul>
 </nav>
 
-
-    <!-- Main content -->
     <div class="flex-grow-1">
-      <!-- Top bar -->
       <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-end px-4">
         <div class="dropdown">
           <a class="btn btn-outline-success dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
@@ -51,7 +49,6 @@
         </div>
       </nav>
 
-      <!-- Usuarios section -->
       <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
           <h3 class="text-success">Gestión de Usuarios</h3>
@@ -62,7 +59,6 @@
           </div>
         </div>
 
-        <!-- Lista de usuarios -->
         <div class="table-responsive">
           <table class="table table-hover table-bordered">
             <thead class="table-success">
@@ -92,7 +88,6 @@
     </div>
   </div>
 
-  <!-- Modal: Añadir Usuario -->
   <div class="modal fade" id="modalAgregarUsuario" tabindex="-1" aria-labelledby="modalAgregarLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -134,7 +129,6 @@
     </div>
   </div>
 
-  <!-- Modal: Editar Usuario -->
   <div class="modal fade" id="modalEditarUsuario" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -176,6 +170,5 @@
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
