@@ -15,30 +15,57 @@
       <div class="col-md-6 col-lg-5">
         <div class="card p-4">
           <h3 class="text-center text-success mb-4">Iniciar Sesión</h3>
-          <form>
+
+          <!-- Importante: añadimos name="username" y name="password"
+               y usamos un botón submit para enviar como formulario clásico -->
+          <form id="login-form">
             <div class="mb-3">
               <label for="usuario" class="form-label">Usuario</label>
-              <input type="text" class="form-control" id="usuario" placeholder="Ingresa tu usuario">
+              <input
+                type="text"
+                class="form-control"
+                id="usuario"
+                name="username"
+                placeholder="Ingresa tu usuario"
+                required
+              >
             </div>
+
             <div class="mb-3">
               <label for="contrasena" class="form-label">Contraseña</label>
-              <input type="password" class="form-control" id="contrasena" placeholder="Ingresa tu contraseña">
+              <input
+                type="password"
+                class="form-control"
+                id="contrasena"
+                name="password"
+                placeholder="Ingresa tu contraseña"
+                required
+              >
             </div>
+
             <div class="d-grid gap-2">
-              <a href="dashboard.html" class="btn btn-green">Iniciar Sesión</a>
+              <!-- Botón de envío (más seguro que un <a href="dashboard.html">) -->
+              <button type="submit" class="btn btn-green">Iniciar Sesión</button>
             </div>
+
             <div class="text-center mt-3">
               <a href="recuperar.html" class="text-decoration-none text-success">¿Olvidaste tu contraseña?</a>
             </div>
           </form>
+
+          <div id="login-error" class="text-danger mt-3" style="min-height:1.25rem;"></div>
+
           <hr>
           <div class="text-center">
             <p class="mb-0">¿No tienes una cuenta?</p>
-            <p><strong><a href="mailto:admin@ejemplo.com" class="text-success text-decoration-none">Contacta al administrador</a></strong></p>
+            <p><strong><a href="mailto:admin@ejemplo.com" class="text-decoration-none">Contacta al administrador</a></strong></p>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Tu script maneja el POST (x-www-form-urlencoded) y la redirección -->
+  <script src="js/script_auth.js"></script>
 </body>
 </html>
