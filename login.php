@@ -8,6 +8,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <link rel="stylesheet" href="css/style.css" />
+  <script src="js/jquery-3.7.1.min.js"></script>
+  <script src="js/login.js"></script>
 </head>
 <body>
   <div class="container login-container">
@@ -15,23 +17,27 @@
       <div class="col-md-6 col-lg-5">
         <div class="card p-4">
           <h3 class="text-center text-success mb-4">Iniciar Sesión</h3>
-          <form>
+          <form id="login-form">
             <div class="mb-3">
               <label for="usuario" class="form-label">Usuario</label>
-              <input type="text" class="form-control" id="usuario" placeholder="Ingresa tu usuario">
+              <input type="text" class="form-control" id="username" name="username" placeholder="Ingresa tu usuario">
             </div>
             <div class="mb-3">
               <label for="contrasena" class="form-label">Contraseña</label>
-              <input type="password" class="form-control" id="contrasena" placeholder="Ingresa tu contraseña">
+              <input type="password" class="form-control" id="password" name="password" placeholder="Ingresa tu contraseña">
             </div>
             <div class="d-grid gap-2">
-              <a href="dashboard.html" class="btn btn-green">Iniciar Sesión</a>
-            </div>
-            <div class="text-center mt-3">
-              <a href="recuperar.html" class="text-decoration-none text-success">¿Olvidaste tu contraseña?</a>
+              <button type="submit" class="btn btn-green">Iniciar Sesión</button>
             </div>
           </form>
           <hr>
+          
+          
+          <div class="text-center">
+            <p class="mb-0">¿Olvidaste tu contraseña?</p>
+            <p><strong><a href="recuperar.html" class="text-success text-decoration-none">Recuperar contraseña</a></strong></p>
+          </div>
+
           <div class="text-center">
             <p class="mb-0">¿No tienes una cuenta?</p>
             <p><strong><a href="mailto:admin@ejemplo.com" class="text-success text-decoration-none">Contacta al administrador</a></strong></p>

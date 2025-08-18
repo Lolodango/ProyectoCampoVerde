@@ -13,7 +13,7 @@
     <img src="images/logo.jpg" alt="Logo Campo Verde" class="img-fluid mb-4" style="max-width: 200px;">
     <h1 class="text-success mb-3">Sistema de Control Residencial</h1>
     <p class="mb-4">Bienvenido al sistema de administración y seguridad del Residencial <strong>Campo Verde</strong>.</p>
-    <a href="login.html" class="btn btn-green btn-lg">Iniciar Sesión</a>
+    <a href="login.php" class="btn btn-green btn-lg">Iniciar Sesión</a>
   </div>
 </body>
 </html>
