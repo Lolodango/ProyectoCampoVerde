@@ -1,10 +1,14 @@
 <?php
+require_once __DIR__ . '/../../database.php';
+
 session_start();
 if (!isset($_SESSION['usuario'])) {
     header("Location: index.php");
     exit();
 }
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -151,3 +155,4 @@ if (!isset($_SESSION['usuario'])) {
     </div>
 </body>
 </html>
+<?php
