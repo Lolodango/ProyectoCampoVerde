@@ -1,40 +1,22 @@
 $(function () {
-
-    $('#login-form').submit(function (e) {
-            e.preventDefault();
-
-            $.ajax({
-                url: 'router.php?action=login',
-                method: 'POST',
-                data: $(this).serialize(),
-                dataType: 'json',
-                success: function (response) {
-                    if (response.status === 'success') {
-                        $('#login-form')[0].reset();
-                        $('#loginResult').text('Login Okay');
-                        setTimeout(function () {
-                            window.location.href = 'dashboard.php';
-                        }, 1000);
-                    } else {
-                        $('#loginResult').text(response.message || 'Error en el login');
-                    }
-                },
-                error: function () {
-                    $('#loginResult').text('Error de conexión con el servidor');
-                }
-            });
-        });
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
+  $('#login-form').on('submit', function (e) {
+    e.preventDefault();
+    $.ajax({
+      url: 'router.php?action=login',
+      method: 'POST',
+      data: $(this).serialize(), // requiere name="username" y name="password"
+      dataType: 'json',
+      success: function (res) {
+        if (res && res.status === 'success') {
+          window.location.href = 'dashboard.php';
+        } else {
+          $('#loginResult').text(res && res.message ? res.message : 'Error en el login');
+        }
+      },
+      error: function (xhr) {
+        console.log('Respuesta cruda:', xhr.responseText);
+        $('#loginResult').text('Error de red');
+      }
+    });
+  });
+});

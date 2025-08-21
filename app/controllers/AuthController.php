@@ -8,9 +8,16 @@ class AuthController {
             session_start();
         }
         
+        header('Content-Type: application/json; charset=utf-8');
+
         $user = new User();
         $username = $_POST['username'] ?? '';
         $password = $_POST['password'] ?? '';
+
+        if ($username === '' || $password === '') {
+            echo json_encode(['status' => 'error', 'message' => 'Usuario y contraseña requeridos']);
+            return;
+        }
 
         if ($user->login($username, $password)) {
             echo json_encode(['status' => 'success']);

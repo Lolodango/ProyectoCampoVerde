@@ -5,7 +5,6 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -17,75 +16,138 @@ if (!isset($_SESSION['usuario'])) {
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <body class="d-flex flex-column min-vh-100">
-    <div class="d-flex flex-grow-1">
-        <?php include 'components/aside.php'; ?>
+<div class="d-flex flex-grow-1">
+    <?php include 'components/aside.php'; ?>
 
-        <div class="d-flex flex-column flex-grow-1">
-            <?php include 'components/header.php'; ?>
+    <div class="d-flex flex-column flex-grow-1">
+        <?php include 'components/header.php'; ?>
 
-            <main class="flex-grow-1">
-                <section class="container mt-4">
-                    <h3 class="text-success mb-4">Mis Quejas</h3>
+        <main class="flex-grow-1">
+            <section class="container mt-4">
+                <h3 class="text-success mb-4">Mis Quejas</h3>
 
-                    <div class="mb-5">
-                        <h5>Historial de Quejas Enviadas</h5>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover align-middle">
-                                <thead class="table-success">
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Fecha</th>
-                                        <th>Título</th>
-                                        <th>Estado</th>
-                                        <th>Detalle</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>2025-07-05</td>
-                                        <td>Ruido excesivo</td>
-                                        <td>En revisión</td>
-                                        <td>Los vecinos del bloque B han tenido música alta hasta la madrugada.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>2025-06-22</td>
-                                        <td>Basura en áreas comunes</td>
-                                        <td>Resuelta</td>
-                                        <td>Hay acumulación de basura cerca del parque infantil.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>2025-05-14</td>
-                                        <td>Luces apagadas en sendero</td>
-                                        <td>Resuelta</td>
-                                        <td>El sendero detrás del gimnasio está completamente a oscuras por la noche.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                <!-- Historial -->
+                <div class="mb-5">
+                    <h5>Historial de Quejas Enviadas</h5>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover align-middle">
+                            <thead class="table-success">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Fecha</th>
+                                    <th>Título</th>
+                                    <th>Estado</th>
+                                    <th>Detalle</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody-quejas">
+                                <tr>
+                                    <td colspan="5" class="text-center">Cargando...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Nueva queja -->
+                <div class="mb-5">
+                    <h5>Registrar Nueva Queja</h5>
+                    <form id="form-queja">
+                        <div class="mb-3">
+                            <label for="titulo" class="form-label">Título</label>
+                            <input type="text" class="form-control" id="titulo" name="titulo"
+                                   placeholder="Ej: Ruido excesivo en la noche" required>
                         </div>
-                    </div>
+                        <div class="mb-3">
+                            <label for="detalle" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="detalle" name="descripcion" rows="4"
+                                      placeholder="Escriba aquí su queja..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success">Enviar Queja</button>
+                        <small id="msgQueja" class="ms-2"></small>
+                    </form>
+                </div>
+            </section>
+        </main>
 
-                    <div class="mb-5">
-                        <h5>Registrar Nueva Queja</h5>
-                        <form>
-                            <div class="mb-3">
-                                <label for="titulo" class="form-label">Título</label>
-                                <input type="text" class="form-control" id="titulo" placeholder="Ej: Ruido excesivo en la noche" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="detalle" class="form-label">Descripción</label>
-                                <textarea class="form-control" id="detalle" rows="4" placeholder="Escriba aquí su queja..." required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-success">Enviar Queja</button>
-                        </form>
-                    </div>
-                </section>
-            </main>
-
-            <?php include 'components/footer.html'; ?>
-        </div>
+        <?php include 'components/footer.html'; ?>
     </div>
+</div>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const tbody = document.getElementById('tbody-quejas');
+  const form  = document.getElementById('form-queja');
+  const msg   = document.getElementById('msgQueja');
+
+  function badge(estado) {
+    if (estado === 'resuelta') return 'success';
+    if (estado === 'en_revision') return 'warning';
+    return 'secondary'; // pendiente 
+  }
+
+  async function cargarQuejas() {
+    try {
+      const res = await fetch('router.php?action=quejas_listar', { credentials: 'same-origin' });
+      if (res.status === 401) { location.href = 'index.php'; return; }
+      const rows = await res.json();
+
+      tbody.innerHTML = '';
+      if (!rows || !rows.length) {
+        tbody.innerHTML = '<tr><td colspan="5" class="text-center">Sin quejas registradas</td></tr>';
+        return;
+      }
+
+      rows.forEach((r, i) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${i + 1}</td>
+          <td>${r.fecha ?? ''}</td>
+          <td>${r.titulo}</td>
+          <td><span class="badge bg-${badge(r.estado)}">${r.estado}</span></td>
+          <td>${r.descripcion}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    } catch (e) {
+      tbody.innerHTML = '<tr><td colspan="5" class="text-center">No se pudo cargar.</td></tr>';
+    }
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    msg.classList.remove('text-danger', 'text-success');
+    msg.textContent = 'Enviando...';
+
+    const fd = new FormData(form);
+    try {
+      const res = await fetch('router.php?action=quejas_crear', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+        body: new URLSearchParams(fd),
+        credentials: 'same-origin'
+      });
+      if (res.status === 401) { location.href = 'index.php'; return; }
+      const r = await res.json();
+
+      if (r && r.ok) {
+        msg.classList.add('text-success');
+        msg.textContent = 'Queja enviada';
+        form.reset();
+        cargarQuejas();
+      } else {
+        msg.classList.add('text-danger');
+        msg.textContent = (r && r.msg) ? r.msg : 'No se pudo crear la queja';
+      }
+    } catch (e) {
+      msg.classList.add('text-danger');
+      msg.textContent = 'Error de red';
+    }
+  });
+
+  cargarQuejas();
+});
+</script>
 </body>
 </html>
