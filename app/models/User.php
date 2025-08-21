@@ -1,9 +1,11 @@
 <?php
-require_once 'app/config/db.php';
+require_once __DIR__ . '/../../database.php';
 
 class User {
     private $db;
-    public function __construct() { $this->db = Database::connect(); }
+    public function __construct() {
+        $this->db = Database::getInstance()->pdo();
+    }
 
     public function login($username, $password) {
         $stmt = $this->db->prepare(
@@ -14,10 +16,8 @@ class User {
         );
         if (!$stmt) return false;
 
-        $stmt->bind_param("s", $username);
-        $stmt->execute();
-        $row = $stmt->get_result()->fetch_assoc();
-        $stmt->close();
+        $stmt->execute([$username]);
+        $row = $stmt->fetch();
 
         if (!$row) return false;
         if (!password_verify($password, $row['contrasena'])) return false;
