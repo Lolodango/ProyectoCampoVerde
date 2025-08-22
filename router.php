@@ -2,9 +2,11 @@
 require_once 'app/controllers/AuthController.php';
 require_once 'app/controllers/QuejaController.php';
 require_once 'app/controllers/AdminQuejaController.php';
+require_once 'app/controllers/ReporteController.php';
 
 $action = $_GET['action'] ?? '';
 
+$reporteController = new ReporteController();
 $authController   = new AuthController();
 $quejaController  = new QuejaController();
 $adminQController = new AdminQuejaController();
@@ -21,6 +23,14 @@ switch ($action) {
     case 'quejas_admin_listar':     $adminQController->listar();  break;
     case 'quejas_admin_estado':     $adminQController->estado();  break;
     case 'quejas_admin_eliminar':   $adminQController->eliminar();break;
+
+
+    // REPORTES
+    case 'reportes_crear':         $reporteController->crear();        break;
+    case 'reportes_listar':        $reporteController->listar();       break;
+    case 'reportes_admin_listar':  $reporteController->listar_admin(); break;
+    case 'reportes_admin_estado':  $reporteController->estado();       break;
+    case 'reportes_eliminar':      $reporteController->eliminar();     break;
 
     default:
         header('Content-Type: application/json; charset=utf-8');
