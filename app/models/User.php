@@ -2,34 +2,29 @@
 require_once __DIR__ . '/../../database.php';
 
 class User {
-    private $db;
+    private PDO $pdo;
+    private ?array $row = null;
+
     public function __construct() {
-        $this->db = Database::getInstance()->pdo();
+        $this->pdo = Database::getInstance()->pdo();
     }
 
-    public function login($username, $password) {
-        $stmt = $this->db->prepare(
-            "SELECT cedula, nombre_usuario, contrasena, numero_casa, id_rol
-             FROM usuarios
-             WHERE nombre_usuario = ?
-             LIMIT 1"
+    public function login(string $username, string $password): bool {
+        $stmt = $this->pdo->prepare(
+            'SELECT cedula, nombre_usuario, contrasena, id_rol
+             FROM Usuarios WHERE nombre_usuario = ? LIMIT 1'
         );
-        if (!$stmt) return false;
-
         $stmt->execute([$username]);
-        $row = $stmt->fetch();
+        $u = $stmt->fetch();
+        if (!$u) return false;
 
-        if (!$row) return false;
-        if (!password_verify($password, $row['contrasena'])) return false;
+        if (!password_verify($password, $u['contrasena'])) return false;
 
-        if (session_status() !== PHP_SESSION_ACTIVE) session_start();
-        session_regenerate_id(true);
-
-        $_SESSION['id_usuario']  = (int)$row['cedula'];
-        $_SESSION['usuario']     = $row['nombre_usuario'];
-        $_SESSION['numero_casa'] = $row['numero_casa'];
-        $_SESSION['rol']         = ((int)$row['id_rol'] === 1 ? 'Administrador' : 'Usuario');
-
+        $this->row = $u; // <- guarda fila para getters
         return true;
     }
+
+    public function getCedula(): ?string        { return $this->row['cedula']         ?? null; }
+    public function getNombreUsuario(): ?string { return $this->row['nombre_usuario'] ?? null; }
+    public function getIdRol(): ?int            { return isset($this->row['id_rol']) ? (int)$this->row['id_rol'] : null; }
 }

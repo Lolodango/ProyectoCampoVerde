@@ -8,8 +8,8 @@ class Database {
         $host = '127.0.0.1';
         $port = '3306';
         $db   = 'ProyectoResidencial';
-        $user = 'root';
-        $pass = ''; // XAMPP por defecto
+        $user = 'campoverde';
+        $pass = 'ClaveSegura2025!';
 
         $dsn = "mysql:host=$host;port=$port;dbname=$db;charset=utf8mb4";
         $this->pdo = new PDO($dsn, $user, $pass, [
@@ -27,3 +27,6 @@ class Database {
         return $this->pdo;
     }
 }
+
+require_once __DIR__ . '/database.php';
+$db = Database::getInstance()->pdo();
